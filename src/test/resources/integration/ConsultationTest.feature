@@ -22,7 +22,6 @@ Feature: Consultation Note Screen functionality
   @ConsultationResponseRequestScreenPresent
   Scenario: Consultation Response/ Request Letterhead should default to the logged-in user
     When New Consult Note is started  
-    And The default letterhead selection displays for the current Oscar user logged-in
     Then Default letterhead selection should be for the current Oscar user logged-in
     
  # @tag3

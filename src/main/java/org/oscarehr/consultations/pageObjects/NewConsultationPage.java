@@ -1,5 +1,6 @@
 package org.oscarehr.consultations.pageObjects;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,9 @@ public class NewConsultationPage {
 	@FindBy(how = How.LINK_TEXT, using = "Consultations")
 	static WebElement consultationsLink;
 	
+	@FindBy(how = How.XPATH, using = "//select[@id='letterheadName']//option[@selected='selected']")
+	static WebElement letterheadName;
+	
 	public void navigate_to_consultations_page() {
 		//Click on search tab and navigate to new window
 		WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -58,7 +62,15 @@ public class NewConsultationPage {
 	}
 	
 	public void start_new_consultation() {
+		//Start new consultation and navigate to new window
 		newConsultationLink.click();
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+	}
+	
+	public void verify_default_letterhead_selection() {
+		Assert.assertEquals(letterheadName.getText(),"oscardoc, doctor");
 	}
 
 }
