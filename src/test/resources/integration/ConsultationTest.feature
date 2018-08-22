@@ -16,15 +16,14 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@tag1
+@ConsultationNoteScreenFunctionality
 Feature: Consultation Note Screen functionality
 
-  @PatientRecordAlreadyExists
-  Scenario: Precondition - User already has an existing demographic patient in his account
-    Given User is logged into oscar-emr
-    When User clicks on Search tab 
-    And User clicks on Search button
-    Then Atleast one demograohic patient record is displayed
+  @ConsultationResponseRequestScreenPresent
+  Scenario: Consultation Response/ Request Letterhead should default to the logged-in user
+    When New Consult Note is started  
+    And The default letterhead selection displays for the current Oscar user logged-in
+    Then Default letterhead selection should be for the current Oscar user logged-in
     
  # @tag3
  # Scenario: Consultation Response/ Request Letterhead Defaults to the Logged in User

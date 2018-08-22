@@ -1,4 +1,4 @@
-package org.oscarehr.integration.consultations;
+package org.oscarehr.integration.consultations.stepDefinitions;
 
 import org.junit.runner.RunWith;
 
@@ -8,7 +8,6 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = {
-//				   "src/test/resources/integration/LoginTest.feature",
 				   "src/test/resources/integration/ConsultationTest.feature"}
 		)
 
