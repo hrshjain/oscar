@@ -24,5 +24,10 @@ Feature: Consultation Note Screen functionality
     When New Consult Note is started  
     Then Default letterhead selection should be for the current Oscar user logged-in
     
+  @AbilitytoSelectLetterheads
+  Scenario: Ability to select other Letterheads selection
+    When User selects Save button
+    Then Save button is available and Consultation Request/ Response is saved
+    
  # @tag3
  # Scenario: Consultation Response/ Request Letterhead Defaults to the Logged in User

@@ -9,7 +9,7 @@ import org.oscarehr.consultations.enums.DriverType;
 import org.oscarehr.consultations.enums.EnvironmentType;
  
 public class WebDriverManager {
-	private WebDriver driver;
+	private static WebDriver driver;
 	private static DriverType driverType;
 	private static EnvironmentType environmentType;
 	private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";

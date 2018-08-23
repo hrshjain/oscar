@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class NewConsultationPage {
@@ -35,6 +36,12 @@ public class NewConsultationPage {
 	
 	@FindBy(how = How.XPATH, using = "//select[@id='letterheadName']//option[@selected='selected']")
 	static WebElement letterheadName;
+	
+	@FindBy(how = How.NAME, using = "service")
+	static WebElement service;
+	
+	@FindBy(how = How.NAME, using = "submitSaveOnly")
+	static WebElement submitButton;
 	
 	public void navigate_to_consultations_page() {
 		//Click on search tab and navigate to new window
@@ -71,6 +78,16 @@ public class NewConsultationPage {
 	
 	public void verify_default_letterhead_selection() {
 		Assert.assertEquals(letterheadName.getText(),"oscardoc, doctor");
+	}
+	
+	public void user_submits_consultation_request() {
+		//user selects a service
+		Select drpService = new Select(service);
+		drpService.selectByIndex(1);
+		
+		//user click on submit button
+		submitButton.click();
+		
 	}
 
 }
