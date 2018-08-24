@@ -23,7 +23,7 @@ public class Hooks {
         //Other selenium methods to wait for page load  until visibility of elements
         //did not work to resolve the unexpected pop-up after clicking Schedule option       
         try {
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

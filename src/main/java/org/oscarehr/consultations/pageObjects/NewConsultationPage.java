@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class NewConsultationPage {
 	
 	WebDriver driver;
+	static String viewConsultationnRequestsWindow;
 	
 	public NewConsultationPage(WebDriver driver) {
 		this.driver = driver;
@@ -35,13 +36,25 @@ public class NewConsultationPage {
 	static WebElement consultationsLink;
 	
 	@FindBy(how = How.XPATH, using = "//select[@id='letterheadName']//option[@selected='selected']")
-	static WebElement letterheadName;
+	static WebElement letterheadDefault;
+	
+	@FindBy(how = How.NAME, using = "letterheadName")
+	static WebElement letterhead;
 	
 	@FindBy(how = How.NAME, using = "service")
 	static WebElement service;
 	
 	@FindBy(how = How.NAME, using = "submitSaveOnly")
 	static WebElement submitButton;
+	
+	@FindBy(how = How.NAME, using = "printPreview")
+	static WebElement printPreview;
+	
+	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "Close")
+	static WebElement closeConsultationWindow;
+	
+	@FindBy(how = How.XPATH, using = "//div[@class='textLayer']//div[1]")
+	static WebElement fromSectionLetterhead;
 	
 	public void navigate_to_consultations_page() {
 		//Click on search tab and navigate to new window
@@ -69,6 +82,9 @@ public class NewConsultationPage {
 	}
 	
 	public void start_new_consultation() {
+		//Save window handle to navigate back after submitting consultation
+		viewConsultationnRequestsWindow = driver.getWindowHandle();
+				
 		//Start new consultation and navigate to new window
 		newConsultationLink.click();
         for(String winHandle : driver.getWindowHandles()){
@@ -77,7 +93,16 @@ public class NewConsultationPage {
 	}
 	
 	public void verify_default_letterhead_selection() {
-		Assert.assertEquals(letterheadName.getText(),"oscardoc, doctor");
+		Assert.assertEquals(letterheadDefault.getText(),"oscardoc, doctor");
+	}
+	
+	public void user_navigates_to_letterhead() {
+		
+	}
+	
+	public void user_selects_other_letterhead() {
+		Select drpLetterhead = new Select(letterhead);
+		drpLetterhead.selectByIndex(0);
 	}
 	
 	public void user_submits_consultation_request() {
@@ -87,7 +112,29 @@ public class NewConsultationPage {
 		
 		//user click on submit button
 		submitButton.click();
+	}
+	
+	public void consultation_request_is_saved() {
+		Assert.assertTrue(driver.getTitle().contains("Confirm Consultation"));
 		
+		//user now closes the window
+		closeConsultationWindow.click();
+		driver.switchTo().window(viewConsultationnRequestsWindow);	
+	}
+	
+	public void user_clicks_Print_Preview_button() {
+		//click on print preview
+		printPreview.click();
+	}
+	
+	public void user_navigates_to_print_preview() {
+		for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+	}
+	
+	public void selected_Letterhead_should_populate_in_FROM_section() {
+		Assert.assertEquals("McMaster Hospital",fromSectionLetterhead.getText());
 	}
 
 }

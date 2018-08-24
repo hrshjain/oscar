@@ -3,7 +3,8 @@ package org.oscarehr.consultations.managers;
 import org.openqa.selenium.WebDriver;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 import org.oscarehr.consultations.pageObjects.NewConsultationPage;
- 	
+import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
+
 public class PageObjectManager {
  
 	private WebDriver driver;
@@ -11,6 +12,8 @@ public class PageObjectManager {
 	private NewConsultationPage newConsultationPage;
 	
 	private LoginPage loginPage;
+	
+	private ViewConsultationRequestsPage viewConsultationRequestsPage;
 
 	public PageObjectManager(WebDriver driver) {
  
@@ -27,6 +30,12 @@ public class PageObjectManager {
 	public LoginPage loginPage() {
 		 
 		return (loginPage == null) ? loginPage = new LoginPage(driver) : loginPage;
+ 
+	}
+	
+	public ViewConsultationRequestsPage viewConsultationRequestsPage() {
+		 
+		return (viewConsultationRequestsPage == null) ? viewConsultationRequestsPage = new ViewConsultationRequestsPage(driver) : viewConsultationRequestsPage;
  
 	}
 }

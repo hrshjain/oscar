@@ -26,8 +26,19 @@ Feature: Consultation Note Screen functionality
     
   @AbilitytoSelectLetterheads
   Scenario: Ability to select other Letterheads selection
+    When User selects letterhead dropdown
+    Then User should be able to select other letterhead name
+    
+  @AbilitytoSaveConsultation
+  Scenario: Ability to select other Letterheads selection
     When User selects Save button
     Then Save button is available and Consultation Request/ Response is saved
+    
+  @AbilitytoDisplayPrintPreview
+  Scenario: Ability to display Consultation Response/ Request print preview screen
+    When User selects Print Preview button
+    Then Consultation Request/ Response Print preview window pops up
+    And Selected Letterhead should populate in FROM section
     
  # @tag3
  # Scenario: Consultation Response/ Request Letterhead Defaults to the Logged in User
