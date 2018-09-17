@@ -9,7 +9,7 @@ import org.oscarehr.consultations.enums.DriverType;
 import org.oscarehr.consultations.enums.EnvironmentType;
  
 public class WebDriverManager {
-	private static WebDriver driver;
+	private WebDriver driver;
 	private static DriverType driverType;
 	private static EnvironmentType environmentType;
 	private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
@@ -21,6 +21,7 @@ public class WebDriverManager {
 	}
  
 	public WebDriver getDriver() {
+		System.out.println("***********The value of driver is :" + driver + "************");
 		if(driver == null) driver = createDriver();
 		return driver;
 	}
@@ -59,6 +60,14 @@ public class WebDriverManager {
 	}	
  
 	public void closeDriver() {
+		for(String child : driver.getWindowHandles()) {
+			driver.switchTo().window(child);
+			driver.close();
+		}
+	}
+	
+	
+	public void quitDriver() {
 		driver.close();
 		driver.quit();
 	}

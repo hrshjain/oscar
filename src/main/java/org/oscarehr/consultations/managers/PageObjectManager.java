@@ -2,14 +2,14 @@ package org.oscarehr.consultations.managers;
 
 import org.openqa.selenium.WebDriver;
 import org.oscarehr.consultations.pageObjects.LoginPage;
-import org.oscarehr.consultations.pageObjects.NewConsultationPage;
+import org.oscarehr.consultations.pageObjects.OscarConsultationRequestPage;
 import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
 
 public class PageObjectManager {
  
 	private WebDriver driver;
  
-	private NewConsultationPage newConsultationPage;
+	private OscarConsultationRequestPage oscarConsultationRequestPage;
 	
 	private LoginPage loginPage;
 	
@@ -21,9 +21,9 @@ public class PageObjectManager {
  
 	}
 	
-	public NewConsultationPage newConsultationPage() {
+	public OscarConsultationRequestPage oscarConsultationRequestPage() {
  
-		return (newConsultationPage == null) ? newConsultationPage = new NewConsultationPage(driver) : newConsultationPage;
+		return (oscarConsultationRequestPage == null) ? oscarConsultationRequestPage = new OscarConsultationRequestPage(driver) : oscarConsultationRequestPage;
  
 	}
 	

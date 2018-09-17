@@ -10,12 +10,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class NewConsultationPage {
+public class OscarConsultationRequestPage {
 	
 	WebDriver driver;
 	static String viewConsultationnRequestsWindow;
 	
-	public NewConsultationPage(WebDriver driver) {
+	public OscarConsultationRequestPage(WebDriver driver) {
 		this.driver = driver;
 	    PageFactory.initElements(driver, this);
 	}
@@ -56,25 +56,36 @@ public class NewConsultationPage {
 	@FindBy(how = How.XPATH, using = "//div[@class='textLayer']//div[1]")
 	static WebElement fromSectionLetterhead;
 	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Patient:')]")
+	static WebElement patientLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[1]//td[2]")
+	static WebElement patientName;
+	
 	public void navigate_to_consultations_page() {
 		//Click on search tab and navigate to new window
+		
 		WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.visibilityOf(searchTab));		
+        wait.until(ExpectedConditions.visibilityOf(searchTab));	
+        
         searchTab.click();
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
-        
+                
         //Click on search button
         searchButton.click();
         
         //Click on Patient Demographic Record Id and navigate to new window
         demographicLink.click();
+        
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
         
-        //Click on Consultations link and navigate to new window
+        
+        
+        
         consultationsLink.click();
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
@@ -119,7 +130,10 @@ public class NewConsultationPage {
 		
 		//user now closes the window
 		closeConsultationWindow.click();
-		driver.switchTo().window(viewConsultationnRequestsWindow);	
+	}
+	
+	public void user_navigates_to_view_consultation_requests_page() {
+		driver.switchTo().window(viewConsultationnRequestsWindow);
 	}
 	
 	public void user_clicks_Print_Preview_button() {
@@ -135,6 +149,11 @@ public class NewConsultationPage {
 	
 	public void selected_Letterhead_should_populate_in_FROM_section() {
 		Assert.assertEquals("McMaster Hospital",fromSectionLetterhead.getText());
+	}
+	
+	public void verify_required_patient_information() {
+		Assert.assertTrue(patientLabel.isDisplayed());
+		Assert.assertTrue(patientName.getText() != null );
 	}
 
 }

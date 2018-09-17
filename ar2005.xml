@@ -6,8 +6,8 @@
       <episodeId>1</episodeId>
       <demographicNo>1</demographicNo>
       <providerNo>999998</providerNo>
-      <formCreated>2018-08-12-07:00</formCreated>
-      <formEdited>2018-08-12T17:02:29.665-07:00</formEdited>
+      <formCreated>2018-09-12+05:30</formCreated>
+      <formEdited>2018-09-12T18:12:38.698+05:30</formEdited>
       <patientInformation>
         <lastName>Smith</lastName>
         <firstName>Jane</firstName>
@@ -19,7 +19,7 @@
         <homePhone>555-555-5555</homePhone>
         <workPhone>666-666-6666</workPhone>
         <language>ENG</language>
-        <dob>1978-04-26-08:00</dob>
+        <dob>1978-04-26+05:30</dob>
         <age>34</age>
         <occupation>
           <value>OCC0005</value>
@@ -73,9 +73,9 @@
           <null>true</null>
         </menCycleRegular>
         <contraceptiveType>nothing</contraceptiveType>
-        <contraceptiveLastUsed>2012-05-15-07:00</contraceptiveLastUsed>
-        <menstrualEDB>2012-05-03-07:00</menstrualEDB>
-        <finalEDB>2012-05-15-07:00</finalEDB>
+        <contraceptiveLastUsed>2012-05-15+05:30</contraceptiveLastUsed>
+        <menstrualEDB>2012-05-03+05:30</menstrualEDB>
+        <finalEDB>2012-05-15+05:30</finalEDB>
         <datingMethods>
           <dates>false</dates>
           <t1US>false</t1US>
@@ -286,7 +286,7 @@
         <hbResult/>
         <hivResult>NEG</hivResult>
         <hivCounsel>false</hivCounsel>
-        <lastPapDate>2012-01-19-08:00</lastPapDate>
+        <lastPapDate>2012-01-19+05:30</lastPapDate>
         <papResult>LSIL/?HSIL</papResult>
         <mcvResult>0.0</mcvResult>
         <aboResult>A</aboResult>
@@ -309,9 +309,9 @@
       <comments>comments</comments>
       <signatures>
         <signature>Marc Dumontier</signature>
-        <date>2018-08-12-07:00</date>
+        <date>2018-09-12+05:30</date>
         <signature2>Blah</signature2>
-        <date2>2018-08-12-07:00</date2>
+        <date2>2018-09-12+05:30</date2>
       </signatures>
     </AR1>
     <AR2>
@@ -321,13 +321,13 @@
       </riskFactorList>
       <recommendedImmunoprophylaxis>
         <rhNegative>false</rhNegative>
-        <rhIgGiven>2018-08-12-07:00</rhIgGiven>
+        <rhIgGiven>2018-09-12+05:30</rhIgGiven>
         <rubella>false</rubella>
         <newbornHepIG>false</newbornHepIG>
         <hepBVaccine>false</hepBVaccine>
       </recommendedImmunoprophylaxis>
       <subsequentVisitList>
-        <date>2011-12-21-08:00</date>
+        <date>2011-12-21+05:30</date>
         <ga>19w+1</ga>
         <weight>52.0</weight>
         <bp>110/70</bp>
@@ -339,7 +339,7 @@
         <comments>1st visit</comments>
       </subsequentVisitList>
       <ultrasound>
-        <date>2012-01-10-08:00</date>
+        <date>2012-01-10+05:30</date>
         <ga>22w+0</ga>
         <results>12 d difference, plac.post/clear,normal anatomy</results>
       </ultrasound>
@@ -377,9 +377,9 @@
       </discussionTopics>
       <signatures>
         <signature>Marc Dumontier</signature>
-        <date>2018-08-12-07:00</date>
+        <date>2018-09-12+05:30</date>
         <signature2>Blah</signature2>
-        <date2>2018-08-12-07:00</date2>
+        <date2>2018-09-12+05:30</date2>
       </signatures>
     </AR2>
   </ARRecord>

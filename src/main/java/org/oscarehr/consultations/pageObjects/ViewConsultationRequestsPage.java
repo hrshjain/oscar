@@ -17,10 +17,12 @@ public class ViewConsultationRequestsPage {
 		this.driver = driver;
 	    PageFactory.initElements(driver, this);
 	}
+	
+	public void user_refreshes_the_page() {
+		driver.navigate().refresh();
+	}
 
 	public void user_selects_latest_consultation_record() {
-		//refresh page and click on latest consultation
-		driver.navigate().refresh();
 		latestConsultationRequest.click();
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);

@@ -19,26 +19,26 @@
 @ConsultationNoteScreenFunctionality
 Feature: Consultation Note Screen functionality
 
-  @ConsultationResponseRequestScreenPresent
-  Scenario: Consultation Response/ Request Letterhead should default to the logged-in user
+  @TestConsultationResponseRequestLetterhead
+  Scenario: Test Consultation Response/ Request Letterhead Defaults to the Logged in User
     When New Consult Note is started  
     Then Default letterhead selection should be for the current Oscar user logged-in
-    
-  @AbilitytoSelectLetterheads
-  Scenario: Ability to select other Letterheads selection
     When User selects letterhead dropdown
     Then User should be able to select other letterhead name
-    
-  @AbilitytoSaveConsultation
-  Scenario: Ability to select other Letterheads selection
     When User selects Save button
     Then Save button is available and Consultation Request/ Response is saved
-    
-  @AbilitytoDisplayPrintPreview
-  Scenario: Ability to display Consultation Response/ Request print preview screen
     When User selects Print Preview button
     Then Consultation Request/ Response Print preview window pops up
     And Selected Letterhead should populate in FROM section
     
- # @tag3
- # Scenario: Consultation Response/ Request Letterhead Defaults to the Logged in User
+  @ConsultationPatientDetailsSection
+  Scenario: Consultation Response/ Request Patient Details Section
+  	When User navigates to Consultation Response/Request Patient Details Section
+  	Then Consultation Response/ Request Patient Details section should show all required Patient Information
+  	When User selects Print Preview button
+  	Then Consultation Request/ Response Print preview window pops up
+  	And Consult Response/ Request Patient Details Section display all required Patient Information
+    
+
+  	
+  
