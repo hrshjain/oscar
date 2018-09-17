@@ -6,17 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.oscarehr.consultations.dataProviders.ConfigFileReader;
+import org.oscarehr.consultations.managers.FileReaderManager;
 
 public class LoginPage {
 	
-	ConfigFileReader configFileReader;
 	WebDriver driver;
 	
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	    PageFactory.initElements(driver, this);
-	    configFileReader= new ConfigFileReader();
 	}
 	
 	@FindBy(how = How.NAME, using = "username")
@@ -34,13 +32,13 @@ public class LoginPage {
 	
 	public void login_into_oscar_emr() {	
 		// launch Fire fox and direct it to the Base URL
-		String baseUrl = configFileReader.getApplicationUrl();
+		String baseUrl = FileReaderManager.getInstance().getConfigReader().getApplicationUrl();
         driver.get(baseUrl);
 
         //Enter Username, password and Pin
-        username.sendKeys(configFileReader.getOscarUsername());
-        password.sendKeys(configFileReader.getOscarPassword());
-        pin.sendKeys(configFileReader.getOscarPin());
+        username.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarUsername());
+        password.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPassword());
+        pin.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPin());
         pin.sendKeys(Keys.RETURN);
 	}
 	

@@ -152,8 +152,21 @@ public class OscarConsultationRequestPage {
 	}
 	
 	public void verify_required_patient_information() {
+		
+		//Full Patient name
 		Assert.assertTrue(patientLabel.isDisplayed());
-		Assert.assertTrue(patientName.getText() != null );
+		Assert.assertEquals(patientName.getText(),"");
+		
+		
+
+//		• Date of birth
+//		• Sex
+//		• Health card number 
+//		• Address
+//		• Home Phone (s)
+//		• Work Phone (s)		
+//		• email
+		
 	}
 
 }

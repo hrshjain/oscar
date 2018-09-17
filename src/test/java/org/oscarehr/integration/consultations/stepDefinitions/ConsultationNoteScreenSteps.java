@@ -76,12 +76,11 @@ public class ConsultationNoteScreenSteps {
 	@When("^User navigates to Consultation Response/Request Patient Details Section$")
 	public void user_navigates_to_Consultation_Response_Request_Patient_Details_Section() {
 		oscarConsultationRequestPage.navigate_to_consultations_page();
-//		viewConsultationRequestsPage.user_selects_latest_consultation_record();
 	}
 
 	@Then("^Consultation Response/ Request Patient Details section should show all required Patient Information$")
 	public void consultation_Response_Request_Patient_Details_section_should_show_all_required_Patient_Information() {
-//		newConsultationPage.verify_required_patient_information();
+		oscarConsultationRequestPage.verify_required_patient_information();
 	}
 
 	@Then("^Consult Response/ Request Patient Details Section display all required Patient Information$")
