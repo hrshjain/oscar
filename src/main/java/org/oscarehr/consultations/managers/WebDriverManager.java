@@ -21,7 +21,6 @@ public class WebDriverManager {
 	}
  
 	public WebDriver getDriver() {
-		System.out.println("***********The value of driver is :" + driver + "************");
 		if(driver == null) driver = createDriver();
 		return driver;
 	}
@@ -66,9 +65,7 @@ public class WebDriverManager {
 		}
 	}
 	
-	
 	public void quitDriver() {
-		driver.close();
 		driver.quit();
 	}
  

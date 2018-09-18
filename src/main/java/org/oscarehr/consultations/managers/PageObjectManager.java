@@ -3,6 +3,7 @@ package org.oscarehr.consultations.managers;
 import org.openqa.selenium.WebDriver;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 import org.oscarehr.consultations.pageObjects.OscarConsultationRequestPage;
+import org.oscarehr.consultations.pageObjects.PrintPreviewPage;
 import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
 
 public class PageObjectManager {
@@ -14,6 +15,8 @@ public class PageObjectManager {
 	private LoginPage loginPage;
 	
 	private ViewConsultationRequestsPage viewConsultationRequestsPage;
+	
+	private PrintPreviewPage printPreviewPage;
 
 	public PageObjectManager(WebDriver driver) {
  
@@ -36,6 +39,12 @@ public class PageObjectManager {
 	public ViewConsultationRequestsPage viewConsultationRequestsPage() {
 		 
 		return (viewConsultationRequestsPage == null) ? viewConsultationRequestsPage = new ViewConsultationRequestsPage(driver) : viewConsultationRequestsPage;
+ 
+	}
+	
+	public PrintPreviewPage printPreviewPage() {
+		 
+		return (printPreviewPage == null) ? printPreviewPage = new PrintPreviewPage(driver) : printPreviewPage;
  
 	}
 }

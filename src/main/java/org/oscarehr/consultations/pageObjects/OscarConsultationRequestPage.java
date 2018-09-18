@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.oscarehr.consultations.managers.FileReaderManager;
+
 
 public class OscarConsultationRequestPage {
 	
@@ -61,6 +63,42 @@ public class OscarConsultationRequestPage {
 	
 	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[1]//td[2]")
 	static WebElement patientName;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Birthdate:')]")
+	static WebElement birthDateLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[6]//td[2]")
+	static WebElement birthDate;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Sex:')]")
+	static WebElement sexLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[7]//td[2]")
+	static WebElement sex;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Health Card No.:')]")
+	static WebElement healthCardLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[8]//td[2]")
+	static WebElement healthCardNumber;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Tel.No.:')]")
+	static WebElement homePhoneLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[3]//td[2]")
+	static WebElement homePhoneNumber;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Work No.:')]")
+	static WebElement workPhoneLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[4]//td[2]")
+	static WebElement workPhoneNumber;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Address:')]")
+	static WebElement addressLabel;
+	
+	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[2]//td[2]")
+	static WebElement address;
 	
 	public void navigate_to_consultations_page() {
 		//Click on search tab and navigate to new window
@@ -155,17 +193,44 @@ public class OscarConsultationRequestPage {
 		
 		//Full Patient name
 		Assert.assertTrue(patientLabel.isDisplayed());
-		Assert.assertEquals(patientName.getText(),"");
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getpatientLastName() +
+							", " + FileReaderManager.getInstance().getConfigReader().getpatientFirstName(), 
+							patientName.getText());
+		//Date of Birth
+		Assert.assertTrue(birthDateLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getyearOfBirth() + "-"
+				         +  FileReaderManager.getInstance().getConfigReader().getmonthOfBirth() + "-"
+				         +  FileReaderManager.getInstance().getConfigReader().getdayOfBirth()
+				, birthDate.getText());
 		
+		//Sex
+		Assert.assertTrue(sexLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getsex(), sex.getText());
+		
+		//HealthCardNumber
+		Assert.assertTrue(healthCardLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().gethealthCardNumber() + "  "
+				          + FileReaderManager.getInstance().getConfigReader().gethealthCardType()
+				        , healthCardNumber.getText());
+		
+		//Address
+		Assert.assertTrue(healthCardLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().gethealthCardNumber() + "  "
+				          + FileReaderManager.getInstance().getConfigReader().gethealthCardType()
+				        , healthCardNumber.getText());
+		
+		//Phone - Home and Work
+		Assert.assertTrue(homePhoneLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().gethomePhone(), homePhoneNumber.getText());
+		
+		Assert.assertTrue(workPhoneLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getworkPhone(), workPhoneNumber.getText());
+		
+		//Address
+		Assert.assertTrue(addressLabel.isDisplayed());
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getaddress(), address.getText());
 		
 
-//		• Date of birth
-//		• Sex
-//		• Health card number 
-//		• Address
-//		• Home Phone (s)
-//		• Work Phone (s)		
-//		• email
 		
 	}
 

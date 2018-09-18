@@ -2,6 +2,7 @@ package org.oscarehr.integration.consultations.stepDefinitions;
 
 import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.pageObjects.OscarConsultationRequestPage;
+import org.oscarehr.consultations.pageObjects.PrintPreviewPage;
 import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
 
 import cucumber.api.java.en.Then;
@@ -12,11 +13,13 @@ public class ConsultationNoteScreenSteps {
 	TestContext testContext;
 	OscarConsultationRequestPage oscarConsultationRequestPage;
 	ViewConsultationRequestsPage viewConsultationRequestsPage;
+	PrintPreviewPage printPreviewPage;
 	
 	public ConsultationNoteScreenSteps(TestContext context) {
 		testContext = context;
 		oscarConsultationRequestPage = testContext.getPageObjectManager().oscarConsultationRequestPage();
 		viewConsultationRequestsPage = testContext.getPageObjectManager().viewConsultationRequestsPage();
+		printPreviewPage = testContext.getPageObjectManager().printPreviewPage();
 	}
 	
 	@When("^New Consult Note is started$")
@@ -76,16 +79,22 @@ public class ConsultationNoteScreenSteps {
 	@When("^User navigates to Consultation Response/Request Patient Details Section$")
 	public void user_navigates_to_Consultation_Response_Request_Patient_Details_Section() {
 		oscarConsultationRequestPage.navigate_to_consultations_page();
+		viewConsultationRequestsPage.user_selects_latest_consultation_record();
 	}
 
 	@Then("^Consultation Response/ Request Patient Details section should show all required Patient Information$")
 	public void consultation_Response_Request_Patient_Details_section_should_show_all_required_Patient_Information() {
 		oscarConsultationRequestPage.verify_required_patient_information();
 	}
+	
+	@When("^User clicks on Print Preview button$")
+	public void user_clicks_on_Print_Preview_button() {
+		oscarConsultationRequestPage.user_clicks_Print_Preview_button();
+	}
 
 	@Then("^Consult Response/ Request Patient Details Section display all required Patient Information$")
 	public void consult_Response_Request_Patient_Details_Section_display_all_required_Patient_Information() {
-	    // Write code here that turns the phrase above into concrete actions
+		printPreviewPage.verify_required_patient_information();
 	}
 
 

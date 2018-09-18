@@ -96,73 +96,85 @@ public class ConfigFileReader {
 	}
 	
 	public String getpatientFirstName() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("patientFirstName");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String getpatientLastName() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("patientLastName");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
-	public String getdateOfBirth() {
-		String url = properties.getProperty("oscar_pin");
+	public String getyearOfBirth() {
+		String url = properties.getProperty("yearOfBirth");
+		if(url != null) return url;
+		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
+	public String getmonthOfBirth() {
+		String url = properties.getProperty("monthOfBirth");
+		if(url != null) return url;
+		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
+	public String getdayOfBirth() {
+		String url = properties.getProperty("dayOfBirth");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String getsex() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("sex");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String gethealthCardNumber() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("healthCardNumber");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String gethealthCardType() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("healthCardType");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String getaddress() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("address");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String getprovince() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("province");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String gethomePhone() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("homePhone");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String getworkPhone() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("workPhone");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
-	public String getemail() {
-		String url = properties.getProperty("oscar_pin");
+	public String getEmail() {
+		String url = properties.getProperty("email");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
 	public String getMRP() {
-		String url = properties.getProperty("oscar_pin");
+		String url = properties.getProperty("MRP");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}

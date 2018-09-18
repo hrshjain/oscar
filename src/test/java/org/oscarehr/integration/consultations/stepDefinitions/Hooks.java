@@ -34,14 +34,13 @@ public class Hooks {
 	}
 	
 //	@After
-//	public void closeAllWimndows() {
+//	public void closeAllWindows() {
 //		testContext.getWebDriverManager().closeDriver();
 //	}
 	
-//	@After("@ConsultationResponseRequestScreenPresent")
+//	@After("@ConsultationPatientDetailsSection")
 //	public void user_quits_web_driver() {
-//		driver.close();
-//		driver.quit();
+//		testContext.getWebDriverManager().quitDriver();
 //	}
 }
 
