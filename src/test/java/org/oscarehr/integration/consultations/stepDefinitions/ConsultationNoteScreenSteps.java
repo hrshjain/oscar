@@ -76,7 +76,7 @@ public class ConsultationNoteScreenSteps {
 		oscarConsultationRequestPage.selected_Letterhead_should_populate_in_FROM_section();
 	}
 	
-	@When("^User navigates to Consultation Response/Request Patient Details Section$")
+	@When("^User navigates to Consultation Response/Request Screen$")
 	public void user_navigates_to_Consultation_Response_Request_Patient_Details_Section() {
 		oscarConsultationRequestPage.navigate_to_consultations_page();
 		viewConsultationRequestsPage.user_selects_latest_consultation_record();
@@ -95,6 +95,37 @@ public class ConsultationNoteScreenSteps {
 	@Then("^Consult Response/ Request Patient Details Section display all required Patient Information$")
 	public void consult_Response_Request_Patient_Details_Section_display_all_required_Patient_Information() {
 		printPreviewPage.verify_required_patient_information();
+	}
+	
+	@Then("^Appointment Notes field is available in Consultation Response/Request Screen$")
+	public void appointment_Notes_field_is_available_in_Consultation_Response_Request_Screen() {
+		oscarConsultationRequestPage.verify_Appointment_Notes_field_is_available();
+	}
+
+	@When("^User enters text in Appointment Notes field and click Update Consultation Request button$")
+	public void user_enters_text_in_Appointment_Notes_field_and_click_Update_Consultation_Request_button() {
+		oscarConsultationRequestPage.user_enters_text_in_Appointment_Notes_field();
+		oscarConsultationRequestPage.user_clicks_on_Update_Consultation_Request();
+	}
+
+	@Then("^Appointment Notes field accepts text and Consultation Request is saved$")
+	public void appointment_Notes_field_accepts_text_and_Consultation_Request_is_saved() {
+		oscarConsultationRequestPage.consultation_request_is_saved();
+	}
+	
+	@Then("^Text fields should appear in the Consultation Request/ Response Note section$")
+	public void text_fields_should_appear_in_the_Consultation_Request_Response_Note_section() {
+		oscarConsultationRequestPage.text_fields_information_present();
+	}
+	
+	@When("^User verifies Pertinent Clinical Information functional buttons$")
+	public void user_verifies_Pertinent_Clinical_Information_functional_buttons() {
+	    // Write code here that turns the phrase above into concrete actions
+	}
+	
+	@Then("^Pertinent Clinical Information functional buttons should be available$")
+	public void pertinent_Clinical_Information_functional_buttons_should_be_available() {
+		oscarConsultationRequestPage.pertinent_Clinical_Information_functional_buttons_available();
 	}
 
 

@@ -78,8 +78,8 @@ public class ConfigFileReader {
 	}
 	
 	public String getOscarUsername() {
-		String url = properties.getProperty("oscar_username");
-		if(url != null) return url;
+		String oscar_username = properties.getProperty("oscar_username");
+		if(oscar_username != null) return oscar_username;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
@@ -91,6 +91,12 @@ public class ConfigFileReader {
 	
 	public String getOscarPin() {
 		String url = properties.getProperty("oscar_pin");
+		if(url != null) return url;
+		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
+	public String getRegistrationID() {
+		String url = properties.getProperty("oscarRegistrationID");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
@@ -151,6 +157,18 @@ public class ConfigFileReader {
 	
 	public String getprovince() {
 		String url = properties.getProperty("province");
+		if(url != null) return url;
+		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
+	public String getcity() {
+		String url = properties.getProperty("city");
+		if(url != null) return url;
+		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
+	public String getpostal() {
+		String url = properties.getProperty("postal");
 		if(url != null) return url;
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}

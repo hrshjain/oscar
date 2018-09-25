@@ -100,6 +100,54 @@ public class OscarConsultationRequestPage {
 	@FindBy(how = How.XPATH, using = "//tr[@class='consultDemographicData']//td[@class='tite4']//tbody//tr[2]//td[2]")
 	static WebElement address;
 	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Appointment Notes:')]")
+	static WebElement appointmentNotesLabel;
+	
+	@FindBy(how = How.XPATH, using = "//textarea[@name='appointmentNotes']")
+    static WebElement appointmentNotes;
+	
+	@FindBy(how = How.CSS, using = "input[value='Update Consultation Request']")
+    static WebElement updateConsultationRequestButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Reason for Consultation')]")
+    static WebElement reasonforConsultationLabel;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Pertinent clinical information:')]")
+    static WebElement pertinentCilinicalInformationLabel;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Significant concurrent problems:')]")
+    static WebElement significantConcurrentPropblemsLabel;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Current Medications:')]")
+    static WebElement currentMedicationsLabel;
+	
+	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Allergies:')]")
+    static WebElement allergiesLabel;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='clinicalInfoButtonBar']//input[@value='Family History']")
+    static WebElement clinicalInfoFamilyHistoryButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='clinicalInfoButtonBar']//input[@value='Medical History']")
+    static WebElement clinicalInfoMedicalHistoryButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='clinicalInfoButtonBar']//input[@value='Ongoing Concerns']")
+    static WebElement clinicalInfoOngoingConcernsButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='clinicalInfoButtonBar']//input[@value='Other Meds']")
+    static WebElement clinicalInfoOtherMedsButton;
+	
+	@FindBy(how = How.CSS, using = "#btnReminders")
+    static WebElement clinicalInfoRemindersButton;
+	
+	@FindBy(how = How.CSS, using = "#fetchRiskFactors_clinicalInformation")
+    static WebElement clinicalInfoRiskFactorsButton;
+	
+	@FindBy(how = How.CSS, using = "#fetchMedications_clinicalInformation")
+    static WebElement clinicalInfoMedicationsButton;
+	
+	@FindBy(how = How.CSS, using = "#fetchLongTermMedications_clinicalInformation")
+    static WebElement clinicalInfoLongTermMedicationsButton;
+	
 	public void navigate_to_consultations_page() {
 		//Click on search tab and navigate to new window
 		
@@ -229,9 +277,37 @@ public class OscarConsultationRequestPage {
 		//Address
 		Assert.assertTrue(addressLabel.isDisplayed());
 		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getaddress(), address.getText());
-		
-
-		
 	}
-
+	
+	public void verify_Appointment_Notes_field_is_available() {
+		Assert.assertTrue(appointmentNotesLabel.isDisplayed());
+	}
+	
+	public void user_enters_text_in_Appointment_Notes_field() {
+		appointmentNotes.sendKeys("abcd efgh");
+	}
+	
+	public void user_clicks_on_Update_Consultation_Request() {
+		updateConsultationRequestButton.click();
+	}
+	
+	public void text_fields_information_present() {
+		Assert.assertTrue(reasonforConsultationLabel.isDisplayed());
+		Assert.assertTrue(pertinentCilinicalInformationLabel.isDisplayed());
+		Assert.assertTrue(significantConcurrentPropblemsLabel.isDisplayed());
+		Assert.assertTrue(currentMedicationsLabel.isDisplayed());
+		Assert.assertTrue(allergiesLabel.isDisplayed());
+	}
+	
+	public void pertinent_Clinical_Information_functional_buttons_available() {
+		Assert.assertTrue(clinicalInfoFamilyHistoryButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoMedicalHistoryButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoOngoingConcernsButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoOtherMedsButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoRemindersButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoRiskFactorsButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoMedicationsButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoMedicationsButton.isDisplayed());
+	}
+	
 }

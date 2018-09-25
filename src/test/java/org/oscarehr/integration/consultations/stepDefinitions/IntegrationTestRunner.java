@@ -8,7 +8,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = {
-				   "src/test/resources/integration/ConsultationTest.feature"}
+				   "src/test/resources/integration/ConsultationNoteScreenTest.feature"}
 		)
 
 public class IntegrationTestRunner {
