@@ -12,7 +12,7 @@ import org.oscarehr.consultations.enums.EnvironmentType;
 public class ConfigFileReader {
 	
 	private Properties properties;
-	private final String propertyFilePath= "src/test/resources/integration/Configuration.properties";
+	private final String propertyFilePath= "src/test/resources/cucumberSeleniumFramework/configuration.properties";
  
 	
 	public ConfigFileReader(){
