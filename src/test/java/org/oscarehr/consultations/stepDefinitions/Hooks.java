@@ -1,4 +1,4 @@
-package org.oscarehr.integration.consultations.stepDefinitions;
+package org.oscarehr.consultations.stepDefinitions;
 
 import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.pageObjects.AppointmentAccessPage;
