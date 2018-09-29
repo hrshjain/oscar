@@ -82,7 +82,14 @@ public class ConsultationNoteScreenSteps {
 
 	@Then("^Default letterhead selection should be for the current Oscar user logged-in$")
 	public void default_letterhead_selection_should_be_for_the_current_Oscar_user_logged_in(){
+		//Verify letterhead is equal to current logged in user
 		WebElement letterheadDefault = driver.findElement(By.xpath("//select[@id='letterheadName']//option[@selected='selected']"));
 		Assert.assertEquals(letterheadDefault.getText(),"oscardoc, doctor");
+		
+		//Close all browser instances
+		for(String child : driver.getWindowHandles()) {
+			driver.switchTo().window(child);
+			driver.close();
+		}
 	}
 }
