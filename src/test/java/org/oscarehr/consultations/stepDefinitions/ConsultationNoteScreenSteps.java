@@ -1,30 +1,29 @@
 package org.oscarehr.consultations.stepDefinitions;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.oscarehr.consultations.managers.FileReaderManager;
+import org.oscarehr.consultations.managers.WebDriverManager;
+
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class ConsultationNoteScreenSteps {
 	
 	WebDriver driver;
+	WebDriverManager webDriverManager;
 	
 	@When("^New Consult Note is started$")
 	public void new_Consult_Note_is_started() {
-		
 		//launch Firefox browser and add implicit wait
-		System.setProperty("webdriver.gecko.driver","/Users/harshjain/code/geckodriver");
-		driver = new FirefoxDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		webDriverManager = new WebDriverManager();
+		driver = webDriverManager.getDriver();
     	
         //Navigate to firefox browser
-        String baseUrl = "https://localhost:8442/oscar";
+        String baseUrl = FileReaderManager.getInstance().getConfigReader().getApplicationUrl();
         driver.get(baseUrl);
 
         //Get web element for username, password and pin
@@ -33,9 +32,9 @@ public class ConsultationNoteScreenSteps {
         WebElement pin = driver.findElement(By.name("pin"));
         
         //Enter values for the web element and press enter
-        username.sendKeys("oscardoc");
-        password.sendKeys("LEADlab!");
-        pin.sendKeys("1117");
+        username.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarUsername());
+        password.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPassword());
+        pin.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPin());
         pin.sendKeys(Keys.RETURN);
         
         //Click on schedule tab to navigate to Appointment access page
@@ -84,12 +83,9 @@ public class ConsultationNoteScreenSteps {
 	public void default_letterhead_selection_should_be_for_the_current_Oscar_user_logged_in(){
 		//Verify letterhead is equal to current logged in user
 		WebElement letterheadDefault = driver.findElement(By.xpath("//select[@id='letterheadName']//option[@selected='selected']"));
-		Assert.assertEquals(letterheadDefault.getText(),"oscardoc, doctor");
+		Assert.assertEquals(letterheadDefault.getText(),FileReaderManager.getInstance().getConfigReader().getOscarUsername() + ", doctor");
 		
 		//Close all browser instances
-		for(String child : driver.getWindowHandles()) {
-			driver.switchTo().window(child);
-			driver.close();
-		}
+		webDriverManager.closeDriver();
 	}
 }
