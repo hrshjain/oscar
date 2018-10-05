@@ -2,11 +2,11 @@ package org.oscarehr.consultations.stepDefinitions;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.oscarehr.consultations.managers.FileReaderManager;
 import org.oscarehr.consultations.managers.WebDriverManager;
+import org.oscarehr.consultations.pageObjects.LoginPage;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,30 +21,11 @@ public class ConsultationNoteScreenSteps {
 		//launch Firefox browser and add implicit wait
 		webDriverManager = new WebDriverManager();
 		driver = webDriverManager.getDriver();
+		
+		LoginPage loginPage = new LoginPage(driver);
     	
-        //Navigate to firefox browser
-        String baseUrl = FileReaderManager.getInstance().getConfigReader().getApplicationUrl();
-        driver.get(baseUrl);
-
-        //Get web element for username, password and pin
-        WebElement username = driver.findElement(By.name("username"));
-        WebElement password = driver.findElement(By.name("password"));
-        WebElement pin = driver.findElement(By.name("pin"));
-        
-        //Enter values for the web element and press enter
-        username.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarUsername());
-        password.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPassword());
-        pin.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPin());
-        pin.sendKeys(Keys.RETURN);
-        
-        //Click on schedule tab to navigate to Appointment access page
-	    try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-	    WebElement schedule = driver.findElement(By.xpath("//a[@class='ng-scope ng-binding'][contains(text(),'Schedule')]"));
-	    schedule.click();
+		loginPage.login_into_oscar_emr();
+		loginPage.click_on_schedule();
 	    
 	    //Click on search tab and navigate to Patient Search Results page
 	    driver.findElement(By.xpath("//a[@title='Search for patient records']")).click();
