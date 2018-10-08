@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.oscarehr.consultations.managers.FileReaderManager;
+import org.oscarehr.consultations.managers.PageObjectManager;
 import org.oscarehr.consultations.managers.WebDriverManager;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 
@@ -15,14 +16,17 @@ public class ConsultationNoteScreenSteps {
 	
 	WebDriver driver;
 	WebDriverManager webDriverManager;
+	LoginPage loginPage;
+	PageObjectManager pageObjectManager;
 	
 	@When("^New Consult Note is started$")
 	public void new_Consult_Note_is_started() {
 		//launch Firefox browser and add implicit wait
 		webDriverManager = new WebDriverManager();
 		driver = webDriverManager.getDriver();
+		pageObjectManager = new PageObjectManager(driver);
 		
-		LoginPage loginPage = new LoginPage(driver);
+		loginPage = pageObjectManager.loginPage();
     	
 		loginPage.login_into_oscar_emr();
 		loginPage.click_on_schedule();

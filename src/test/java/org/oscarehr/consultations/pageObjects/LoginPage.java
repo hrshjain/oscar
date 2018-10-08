@@ -40,6 +40,13 @@ public class LoginPage {
         password.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPassword());
         pin.sendKeys(FileReaderManager.getInstance().getConfigReader().getOscarPin());
         pin.sendKeys(Keys.RETURN);
+        
+        //Adding 5 minute sleep delay
+        try {
+        	Thread.sleep(5000);
+        } catch (InterruptedException e) {
+        	e.printStackTrace();
+        }
 	}
 	
 	public void click_on_schedule() {
