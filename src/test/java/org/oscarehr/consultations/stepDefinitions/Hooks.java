@@ -28,15 +28,6 @@ public class Hooks {
 	public void user_logs_into_oscar_emr() {
         //Start Browser and enter Enter Login credentials
         loginPage.login_into_oscar_emr();
-
-        //Other selenium methods to wait for page load  until visibility of elements
-        //did not work to resolve the unexpected pop-up after clicking Schedule option       
-        try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         
         // Click on schedule Option
         loginPage.click_on_schedule();

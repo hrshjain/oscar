@@ -5,6 +5,7 @@ import org.oscarehr.consultations.pageObjects.AppointmentAccessPage;
 import org.oscarehr.consultations.pageObjects.EncounterPage;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 import org.oscarehr.consultations.pageObjects.OscarConsultationRequestPage;
+import org.oscarehr.consultations.pageObjects.PatientDetailInfoPage;
 import org.oscarehr.consultations.pageObjects.PatientSearchResultsPage;
 import org.oscarehr.consultations.pageObjects.PrintPreviewPage;
 import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
@@ -26,6 +27,8 @@ public class PageObjectManager {
 	private EncounterPage encounterPage;
 	
 	private PatientSearchResultsPage patientSearchResultsPage;
+	
+	private PatientDetailInfoPage patientDetailInfoPage;
 
 	public PageObjectManager(WebDriver driver) {
  
@@ -74,4 +77,11 @@ public class PageObjectManager {
 		return (patientSearchResultsPage == null) ? patientSearchResultsPage = new PatientSearchResultsPage(driver) : patientSearchResultsPage;
  
 	}
+	
+	public PatientDetailInfoPage patientDetailInfoPage() {
+		 
+		return (patientDetailInfoPage == null) ? patientDetailInfoPage = new PatientDetailInfoPage(driver) : patientDetailInfoPage;
+ 
+	}
+	
 }

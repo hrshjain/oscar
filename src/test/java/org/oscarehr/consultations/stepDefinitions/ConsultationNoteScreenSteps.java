@@ -1,7 +1,12 @@
 package org.oscarehr.consultations.stepDefinitions;
 
 import org.oscarehr.consultations.cucumber.TestContext;
+import org.oscarehr.consultations.enums.Context;
+import org.oscarehr.consultations.pageObjects.AppointmentAccessPage;
+import org.oscarehr.consultations.pageObjects.LoginPage;
 import org.oscarehr.consultations.pageObjects.OscarConsultationRequestPage;
+import org.oscarehr.consultations.pageObjects.PatientDetailInfoPage;
+import org.oscarehr.consultations.pageObjects.PatientSearchResultsPage;
 import org.oscarehr.consultations.pageObjects.PrintPreviewPage;
 import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
 
@@ -11,12 +16,20 @@ import cucumber.api.java.en.When;
 public class ConsultationNoteScreenSteps {
 	
 	TestContext testContext;
+	LoginPage loginPage;
+	AppointmentAccessPage appointmentAccessPage;
+	PatientSearchResultsPage patientSearchResultsPage;
+	PatientDetailInfoPage patientDetailInfoPage;
 	OscarConsultationRequestPage oscarConsultationRequestPage;
 	ViewConsultationRequestsPage viewConsultationRequestsPage;
 	PrintPreviewPage printPreviewPage;
 	
 	public ConsultationNoteScreenSteps(TestContext context) {
 		testContext = context;
+		loginPage = testContext.getPageObjectManager().loginPage();
+		appointmentAccessPage = testContext.getPageObjectManager().appointmentAccessPage();
+		patientSearchResultsPage = testContext.getPageObjectManager().patientSearchResultsPage();
+		patientDetailInfoPage = testContext.getPageObjectManager().patientDetailInfoPage();
 		oscarConsultationRequestPage = testContext.getPageObjectManager().oscarConsultationRequestPage();
 		viewConsultationRequestsPage = testContext.getPageObjectManager().viewConsultationRequestsPage();
 		printPreviewPage = testContext.getPageObjectManager().printPreviewPage();
@@ -24,11 +37,22 @@ public class ConsultationNoteScreenSteps {
 	
 	@When("^New Consult Note is started$")
 	public void new_Consult_Note_is_started() {
-		//Navigate to Consultations Page
-		oscarConsultationRequestPage.navigate_to_consultations_page();
+		//Navigate from Appointment Access Page to PatientSearchResultsPage
+		appointmentAccessPage.user_navigates_to_patient_search_results_page();
 		
-		//Click on New Consultation link
-        oscarConsultationRequestPage.start_new_consultation();
+		//User selects Patient record and navigates to Patient Detail Info Page
+		patientSearchResultsPage.user_searches_for_active_patients();
+		patientSearchResultsPage.user_selects_Patient_Demographic_and_navigates_to_Patient_Details_Info_Page();
+
+		//Navigate to Consultations Page
+		patientDetailInfoPage.click_on_Consultations_and_navigate_to_ViewConsultationRequests_Page();
+		
+		//Get current window handle
+		testContext.scenarioContext.setContext(Context.VIEW_CONSULTATION_REQUEST_PAGE_HANDLE, viewConsultationRequestsPage.get_current_window_handle());
+        
+        //Click on New Consultation to start new consultation
+        viewConsultationRequestsPage.user_starts_new_consultation();
+        
 	}
 
 	@Then("^Default letterhead selection should be for the current Oscar user logged-in$")
@@ -56,7 +80,7 @@ public class ConsultationNoteScreenSteps {
 	@Then("^Save button is available and Consultation Request/ Response is saved$")
 	public void save_button_is_available_and_Consultation_Request_Response_is_saved() {
 		oscarConsultationRequestPage.consultation_request_is_saved();
-		oscarConsultationRequestPage.user_navigates_to_view_consultation_requests_page();
+		oscarConsultationRequestPage.user_navigates_to_given_window_handle((String)testContext.scenarioContext.getContext(Context.VIEW_CONSULTATION_REQUEST_PAGE_HANDLE));
 		viewConsultationRequestsPage.user_refreshes_the_page();
 	}
 	
@@ -78,7 +102,7 @@ public class ConsultationNoteScreenSteps {
 	
 	@When("^User navigates to Consultation Response/Request Screen$")
 	public void user_navigates_to_Consultation_Response_Request_Patient_Details_Section() {
-		oscarConsultationRequestPage.navigate_to_consultations_page();
+		oscarConsultationRequestPage.user_navigates_to_given_window_handle((String)testContext.scenarioContext.getContext(Context.VIEW_CONSULTATION_REQUEST_PAGE_HANDLE));
 		viewConsultationRequestsPage.user_selects_latest_consultation_record();
 	}
 

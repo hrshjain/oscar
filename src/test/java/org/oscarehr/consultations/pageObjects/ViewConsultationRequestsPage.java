@@ -13,6 +13,9 @@ public class ViewConsultationRequestsPage {
 	@FindBy(how = How.XPATH, using = "//td[@class='MainTableRightColumn']/table/tbody/tr[2]/td[1]/table/tbody/tr[last()]/td[2]/a")
 	static WebElement latestConsultationRequest;
 	
+	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "New Consultation")
+	static WebElement newConsultationLink;
+	
 	public ViewConsultationRequestsPage(WebDriver driver) {
 		this.driver = driver;
 	    PageFactory.initElements(driver, this);
@@ -27,6 +30,18 @@ public class ViewConsultationRequestsPage {
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
+	}
+	
+	public void user_starts_new_consultation() {		
+		//Start new consultation and navigate to new window
+		newConsultationLink.click();
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+	}
+	
+	public String get_current_window_handle() {
+		return driver.getWindowHandle();
 	}
 
 }

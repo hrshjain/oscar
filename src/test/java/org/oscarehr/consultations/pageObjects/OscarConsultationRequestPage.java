@@ -6,36 +6,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.oscarehr.consultations.managers.FileReaderManager;
-
 
 public class OscarConsultationRequestPage {
 	
 	WebDriver driver;
-	static String viewConsultationnRequestsWindow;
 	
 	public OscarConsultationRequestPage(WebDriver driver) {
 		this.driver = driver;
 	    PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "New Consultation")
-	static WebElement newConsultationLink;
-	
 	@FindBy(how = How.XPATH, using = "//a[@title='Search for patient records']")
 	static WebElement searchTab;
 	
 	@FindBy(how = How.XPATH, using = "//input[@title='Search active patients']")
 	static WebElement searchButton;
-	
-	@FindBy(how = How.XPATH, using = "//a[@title='Master Demographic File']")
-	static WebElement demographicLink;
-	
-	@FindBy(how = How.LINK_TEXT, using = "Consultations")
-	static WebElement consultationsLink;
 	
 	@FindBy(how = How.XPATH, using = "//select[@id='letterheadName']//option[@selected='selected']")
 	static WebElement letterheadDefault;
@@ -148,47 +135,6 @@ public class OscarConsultationRequestPage {
 	@FindBy(how = How.CSS, using = "#fetchLongTermMedications_clinicalInformation")
     static WebElement clinicalInfoLongTermMedicationsButton;
 	
-	public void navigate_to_consultations_page() {
-		//Click on search tab and navigate to new window
-		
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.visibilityOf(searchTab));	
-        
-        searchTab.click();
-        for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
-        }
-                
-        //Click on search button
-        searchButton.click();
-        
-        //Click on Patient Demographic Record Id and navigate to new window
-        demographicLink.click();
-        
-        for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
-        }
-        
-        
-        
-        
-        consultationsLink.click();
-        for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
-        }
-	}
-	
-	public void start_new_consultation() {
-		//Save window handle to navigate back after submitting consultation
-		viewConsultationnRequestsWindow = driver.getWindowHandle();
-				
-		//Start new consultation and navigate to new window
-		newConsultationLink.click();
-        for(String winHandle : driver.getWindowHandles()){
-            driver.switchTo().window(winHandle);
-        }
-	}
-	
 	public void verify_default_letterhead_selection() {
 		Assert.assertEquals(letterheadDefault.getText(),"oscardoc, doctor");
 	}
@@ -218,8 +164,8 @@ public class OscarConsultationRequestPage {
 		closeConsultationWindow.click();
 	}
 	
-	public void user_navigates_to_view_consultation_requests_page() {
-		driver.switchTo().window(viewConsultationnRequestsWindow);
+	public void user_navigates_to_given_window_handle(String windowHandle) {
+		driver.switchTo().window(windowHandle);
 	}
 	
 	public void user_clicks_Print_Preview_button() {
