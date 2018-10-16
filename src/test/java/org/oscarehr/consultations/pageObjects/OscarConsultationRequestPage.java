@@ -42,9 +42,6 @@ public class OscarConsultationRequestPage {
 	@FindBy(how = How.PARTIAL_LINK_TEXT, using = "Close")
 	static WebElement closeConsultationWindow;
 	
-	@FindBy(how = How.XPATH, using = "//div[@class='textLayer']//div[1]")
-	static WebElement fromSectionLetterhead;
-	
 	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Patient:')]")
 	static WebElement patientLabel;
 	
@@ -168,19 +165,13 @@ public class OscarConsultationRequestPage {
 		driver.switchTo().window(windowHandle);
 	}
 	
-	public void user_clicks_Print_Preview_button() {
+	public void user_clicks_Print_Preview_button_and_navigates_to_print_preview() {
 		//click on print preview
 		printPreview.click();
-	}
-	
-	public void user_navigates_to_print_preview() {
+		
 		for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
-	}
-	
-	public void selected_Letterhead_should_populate_in_FROM_section() {
-		Assert.assertEquals("McMaster Hospital",fromSectionLetterhead.getText());
 	}
 	
 	public void verify_required_patient_information() {

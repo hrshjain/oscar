@@ -11,16 +11,14 @@ Feature: Consultation Note Screen functionality
     Then User should be able to select other letterhead name
     When User selects Save button
     Then Save button is available and Consultation Request/ Response is saved
-    When User selects Print Preview button
-    Then Consultation Request/ Response Print preview window pops up
-    And Selected Letterhead should populate in FROM section
+    When User clicks on Print Preview button and navigates to Print Preview screen
+    Then Selected Letterhead should populate in FROM section
     
 #  @1.1ConsultationPatientDetailsSection
 #  Scenario: 1.1 Consultation Response/ Request Patient Details Section
 #  	When User navigates to Consultation Response/Request Screen
 #  	Then Consultation Response/ Request Patient Details section should show all required Patient Information
-#  	When User clicks on Print Preview button
-#  	Then Consultation Request/ Response Print preview window pops up
+#  	When User clicks on Print Preview button and navigates to Print Preview screen
 #  	And Consult Response/ Request Patient Details Section display all required Patient Information
 #    
 #  @1.2TestFieldsInConsultationResponseNoteSection

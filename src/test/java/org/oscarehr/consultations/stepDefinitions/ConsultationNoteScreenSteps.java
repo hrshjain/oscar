@@ -84,20 +84,15 @@ public class ConsultationNoteScreenSteps {
 		viewConsultationRequestsPage.user_refreshes_the_page();
 	}
 	
-	@When("^User selects Print Preview button$")
+	@When("^User clicks on Print Preview button and navigates to Print Preview screen$")
 	public void user_selects_Print_Preview_button() {
 		viewConsultationRequestsPage.user_selects_latest_consultation_record();
-		oscarConsultationRequestPage.user_clicks_Print_Preview_button();
-	}
-
-	@Then("^Consultation Request/ Response Print preview window pops up$")
-	public void consultation_Request_Response_Print_preview_window_pops_up() {
-		oscarConsultationRequestPage.user_navigates_to_print_preview();
+		oscarConsultationRequestPage.user_clicks_Print_Preview_button_and_navigates_to_print_preview();
 	}
 
 	@Then("^Selected Letterhead should populate in FROM section$")
 	public void selected_Letterhead_should_populate_in_FROM_section() {
-		oscarConsultationRequestPage.selected_Letterhead_should_populate_in_FROM_section();
+		printPreviewPage.selected_Letterhead_should_populate_in_FROM_section();
 	}
 	
 	@When("^User navigates to Consultation Response/Request Screen$")
@@ -111,10 +106,6 @@ public class ConsultationNoteScreenSteps {
 		oscarConsultationRequestPage.verify_required_patient_information();
 	}
 	
-	@When("^User clicks on Print Preview button$")
-	public void user_clicks_on_Print_Preview_button() {
-		oscarConsultationRequestPage.user_clicks_Print_Preview_button();
-	}
 
 	@Then("^Consult Response/ Request Patient Details Section display all required Patient Information$")
 	public void consult_Response_Request_Patient_Details_Section_display_all_required_Patient_Information() {

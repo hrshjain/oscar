@@ -6,6 +6,7 @@ import org.oscarehr.consultations.pageObjects.EncounterPage;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 import org.oscarehr.consultations.pageObjects.PatientSearchResultsPage;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class Hooks {
@@ -42,9 +43,9 @@ public class Hooks {
 	}
 	
 	
-//	@After
-//	public void closeAllWindows() {
-//		testContext.getWebDriverManager().closeDriver();
-//	}
+	@After
+	public void closeAllWindows() {
+		testContext.getWebDriverManager().closeDriver();
+	}
 }
 

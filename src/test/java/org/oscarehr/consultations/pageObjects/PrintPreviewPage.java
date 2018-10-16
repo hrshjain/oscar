@@ -18,6 +18,9 @@ public class PrintPreviewPage {
 		this.driver = driver;
 	    PageFactory.initElements(driver, this);
 	}
+	
+	@FindBy(how = How.XPATH, using = "//div[@class='textLayer']//div[1]")
+	static WebElement fromSectionLetterhead;
 
 	@FindBy(how = How.CSS, using = ".textLayer > div:nth-child(15)")
 	static WebElement patientLabel;
@@ -72,6 +75,10 @@ public class PrintPreviewPage {
 	
 	@FindBy(how = How.CSS, using = ".textLayer > div:nth-child(36)")
 	static WebElement MRP;
+	
+	public void selected_Letterhead_should_populate_in_FROM_section() {
+		Assert.assertEquals("McMaster Hospital",fromSectionLetterhead.getText());
+	}
 
 	
 	public void verify_required_patient_information() {
