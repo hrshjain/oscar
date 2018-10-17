@@ -25,7 +25,7 @@ public class OscarConsultationRequestPage {
 	static WebElement searchButton;
 	
 	@FindBy(how = How.XPATH, using = "//select[@id='letterheadName']//option[@selected='selected']")
-	static WebElement letterheadDefault;
+	static WebElement letterheadSelected;
 	
 	@FindBy(how = How.NAME, using = "letterheadName")
 	static WebElement letterhead;
@@ -133,7 +133,7 @@ public class OscarConsultationRequestPage {
     static WebElement clinicalInfoLongTermMedicationsButton;
 	
 	public void verify_default_letterhead_selection() {
-		Assert.assertEquals(letterheadDefault.getText(),"oscardoc, doctor");
+		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getOscarUsername() + ", doctor", letterheadSelected.getText());
 	}
 	
 	public void user_navigates_to_letterhead() {
@@ -143,6 +143,10 @@ public class OscarConsultationRequestPage {
 	public void user_selects_other_letterhead() {
 		Select drpLetterhead = new Select(letterhead);
 		drpLetterhead.selectByIndex(0);
+	}
+	
+	public String get_value_of_selected_letterhead() {
+		return letterheadSelected.getText();
 	}
 	
 	public void user_submits_consultation_request() {

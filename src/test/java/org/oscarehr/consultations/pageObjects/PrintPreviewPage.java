@@ -76,8 +76,8 @@ public class PrintPreviewPage {
 	@FindBy(how = How.CSS, using = ".textLayer > div:nth-child(36)")
 	static WebElement MRP;
 	
-	public void selected_Letterhead_should_populate_in_FROM_section() {
-		Assert.assertEquals("McMaster Hospital",fromSectionLetterhead.getText());
+	public String get_Letterhead_displayed_in_FROM_section() {
+		return fromSectionLetterhead.getText();
 	}
 
 	

@@ -1,5 +1,6 @@
 package org.oscarehr.consultations.stepDefinitions;
 
+import org.junit.Assert;
 import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.enums.Context;
 import org.oscarehr.consultations.pageObjects.AppointmentAccessPage;
@@ -87,12 +88,18 @@ public class ConsultationNoteScreenSteps {
 	@When("^User clicks on Print Preview button and navigates to Print Preview screen$")
 	public void user_selects_Print_Preview_button() {
 		viewConsultationRequestsPage.user_selects_latest_consultation_record();
+		
+		//get value of current letterhead
+		testContext.scenarioContext.setContext(Context.SELECTED_LETTERHEAD_FOR_CONSULTATION_REQUEST, oscarConsultationRequestPage.get_value_of_selected_letterhead());
+		
 		oscarConsultationRequestPage.user_clicks_Print_Preview_button_and_navigates_to_print_preview();
 	}
 
 	@Then("^Selected Letterhead should populate in FROM section$")
 	public void selected_Letterhead_should_populate_in_FROM_section() {
-		printPreviewPage.selected_Letterhead_should_populate_in_FROM_section();
+		String selectedLetterHEAD = (String)testContext.scenarioContext.getContext(Context.SELECTED_LETTERHEAD_FOR_CONSULTATION_REQUEST);
+		
+		Assert.assertEquals(selectedLetterHEAD, printPreviewPage.get_Letterhead_displayed_in_FROM_section());
 	}
 	
 	@When("^User navigates to Consultation Response/Request Screen$")
