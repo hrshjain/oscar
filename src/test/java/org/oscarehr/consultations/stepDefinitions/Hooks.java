@@ -4,8 +4,11 @@ import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.pageObjects.AppointmentAccessPage;
 import org.oscarehr.consultations.pageObjects.EncounterPage;
 import org.oscarehr.consultations.pageObjects.LoginPage;
+import org.oscarehr.consultations.pageObjects.PatientDetailInfoPage;
 import org.oscarehr.consultations.pageObjects.PatientSearchResultsPage;
+import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
 
+//import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class Hooks {
@@ -15,6 +18,8 @@ public class Hooks {
 	AppointmentAccessPage appointmentAccessPage;
 	PatientSearchResultsPage patientSearchResultsPage;
 	EncounterPage encounterPage;
+	PatientDetailInfoPage patientDetailInfoPage;
+	ViewConsultationRequestsPage viewConsultationRequestsPage;
 	
 	public Hooks(TestContext context) {
 		testContext = context;
@@ -35,6 +40,8 @@ public class Hooks {
 	
 	@Before("@1.3TestFieldsInConsultationResponseNoteSection")
 	public void add_cpp_notes_to_patient_echart() {
+		
+		//Add CPP notes and close webdriver manager
 		appointmentAccessPage.user_navigates_to_patient_search_results_page();
 		patientSearchResultsPage.user_searches_for_active_patients();
 		patientSearchResultsPage.user_navigates_to_encounter_page();

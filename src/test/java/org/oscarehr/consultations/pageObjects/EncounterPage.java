@@ -1,17 +1,30 @@
 package org.oscarehr.consultations.pageObjects;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.oscarehr.consultations.managers.FileReaderManager;
 
 public class EncounterPage {
 	
 	WebDriver driver;
 	
-	@FindBy(how = How.XPATH, using = "//td[@class='MainTableRightColumn']/table/tbody/tr[2]/td[1]/table/tbody/tr[last()]/td[2]/a")
-	static WebElement latestConsultationRequest;
+	@FindBy(how = How.XPATH, using = "//div[@id='FamHistory']//div//a[@title='Add Item'][contains(text(),'+')]")
+	static WebElement addFamilyHistoryButton;
+	
+	@FindBy(how = How.XPATH, using = "//textarea[@id='noteEditTxt']")
+	static WebElement familyHistoryNotes;
+	
+	@FindBy(how = How.XPATH, using = "//form[@id='frmIssueNotes']//input[@title='Sign & Save']")
+	static WebElement signAndSaveFamilyHistory;
+	
+	@FindBy(how = How.XPATH, using = "//a[@title='Master Record']")
+	static WebElement patientDetailInfoLink;
 	
 	public EncounterPage(WebDriver driver) {
 		this.driver = driver;
@@ -20,6 +33,37 @@ public class EncounterPage {
 	
 	public void add_cpp_notes_to_patient_echart() {
 		
-	}
+		//Accept Alert if it pops ups
+		try {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.alertIsPresent());
+		driver.switchTo().alert().accept();
+		} catch (TimeoutException ex) {
+	        // Alert not present
+	        ex.printStackTrace();
+	    }
 
+		//Wait for page load to complete
+       try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+       //Add Family History CPP Note
+		addFamilyHistoryButton.click();
+		for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+		familyHistoryNotes.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
+		signAndSaveFamilyHistory.click();
+	}
+	
+	public void navigate_to_patient_info_page() {
+		patientDetailInfoLink.click();
+		for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+	}	
 }

@@ -108,6 +108,9 @@ public class OscarConsultationRequestPage {
 	@FindBy(how = How.XPATH, using = "//td[contains(text(),'Allergies:')]")
     static WebElement allergiesLabel;
 	
+	@FindBy(how = How.ID, using = "clinicalInformation")
+    static WebElement clinicalInformationTextArea;
+	
 	@FindBy(how = How.XPATH, using = "//td[@id='clinicalInfoButtonBar']//input[@value='Family History']")
     static WebElement clinicalInfoFamilyHistoryButton;
 	
@@ -131,6 +134,7 @@ public class OscarConsultationRequestPage {
 	
 	@FindBy(how = How.CSS, using = "#fetchLongTermMedications_clinicalInformation")
     static WebElement clinicalInfoLongTermMedicationsButton;
+	
 	
 	public void verify_default_letterhead_selection() {
 		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getOscarUsername() + ", doctor", letterheadSelected.getText());
@@ -225,7 +229,7 @@ public class OscarConsultationRequestPage {
 	}
 	
 	public void user_enters_text_in_Appointment_Notes_field() {
-		appointmentNotes.sendKeys("abcd efgh");
+		appointmentNotes.sendKeys("Sample Appointment Note for QA Purpose");
 	}
 	
 	public void user_clicks_on_Update_Consultation_Request() {
@@ -250,5 +254,20 @@ public class OscarConsultationRequestPage {
 		Assert.assertTrue(clinicalInfoMedicationsButton.isDisplayed());
 		Assert.assertTrue(clinicalInfoMedicationsButton.isDisplayed());
 	}
+	
+	public void user_selects_clinicalInfoFamilyHistory_button() {
+		clinicalInfoFamilyHistoryButton.click();
+	}
+	
+	public void user_validates_patient_chart_data_added_in_clinicalInformation_textarea() {
+		Assert.assertTrue(clinicalInformationTextArea.getAttribute("value").contains(FileReaderManager.getInstance().getConfigReader().getsampleChartData()));
+	}
+	
+	public void user_is_able_to_edit_clinicalInformation_text() {
+		clinicalInformationTextArea.clear();
+		clinicalInformationTextArea.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
+	}
+	
+	
 	
 }

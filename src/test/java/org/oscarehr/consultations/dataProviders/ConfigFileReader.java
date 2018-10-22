@@ -197,6 +197,12 @@ public class ConfigFileReader {
 		else throw new RuntimeException("url not specified in the Configuration.properties file.");
 	}
 	
+	public String getsampleChartData() {
+		String url = properties.getProperty("sampleChartData");
+		if(url != null) return url;
+		else throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
 	
  
 }

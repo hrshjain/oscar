@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.enums.Context;
 import org.oscarehr.consultations.pageObjects.AppointmentAccessPage;
+import org.oscarehr.consultations.pageObjects.EncounterPage;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 import org.oscarehr.consultations.pageObjects.OscarConsultationRequestPage;
 import org.oscarehr.consultations.pageObjects.PatientDetailInfoPage;
@@ -24,6 +25,8 @@ public class ConsultationNoteScreenSteps {
 	OscarConsultationRequestPage oscarConsultationRequestPage;
 	ViewConsultationRequestsPage viewConsultationRequestsPage;
 	PrintPreviewPage printPreviewPage;
+	EncounterPage encounterPage;
+
 	
 	public ConsultationNoteScreenSteps(TestContext context) {
 		testContext = context;
@@ -34,6 +37,7 @@ public class ConsultationNoteScreenSteps {
 		oscarConsultationRequestPage = testContext.getPageObjectManager().oscarConsultationRequestPage();
 		viewConsultationRequestsPage = testContext.getPageObjectManager().viewConsultationRequestsPage();
 		printPreviewPage = testContext.getPageObjectManager().printPreviewPage();
+		encounterPage = testContext.getPageObjectManager().encounterPage();
 	}
 	
 	@When("^New Consult Note is started$")
@@ -85,11 +89,11 @@ public class ConsultationNoteScreenSteps {
 		viewConsultationRequestsPage.user_refreshes_the_page();
 	}
 	
-	@When("^User clicks on Print Preview button and navigates to Print Preview screen$")
-	public void user_selects_Print_Preview_button() {
+	@When("^User selects Print Preview button and navigates to Print Preview screen - after saving consultation request$")
+	public void user_selects_Print_Preview_button_after_saving_consultation_request() {
 		viewConsultationRequestsPage.user_selects_latest_consultation_record();
 		
-		//get value of current letterhead
+		//get value of current letterhead from Consultation Request Screen
 		testContext.scenarioContext.setContext(Context.SELECTED_LETTERHEAD_FOR_CONSULTATION_REQUEST, oscarConsultationRequestPage.get_value_of_selected_letterhead());
 		
 		oscarConsultationRequestPage.user_clicks_Print_Preview_button_and_navigates_to_print_preview();
@@ -103,14 +107,29 @@ public class ConsultationNoteScreenSteps {
 	}
 	
 	@When("^User navigates to Consultation Response/Request Screen$")
-	public void user_navigates_to_Consultation_Response_Request_Patient_Details_Section() {
-		oscarConsultationRequestPage.user_navigates_to_given_window_handle((String)testContext.scenarioContext.getContext(Context.VIEW_CONSULTATION_REQUEST_PAGE_HANDLE));
+	public void user_navigates_to_Consultation_Response_Request_Screen() {
+		//Navigate from Appointment Access Page to PatientSearchResultsPage
+		appointmentAccessPage.user_navigates_to_patient_search_results_page();
+		
+		//User selects Patient record and navigates to Patient Detail Info Page
+		patientSearchResultsPage.user_searches_for_active_patients();
+		patientSearchResultsPage.user_selects_Patient_Demographic_and_navigates_to_Patient_Details_Info_Page();
+
+		//Navigate to Consultations Page
+		patientDetailInfoPage.click_on_Consultations_and_navigate_to_ViewConsultationRequests_Page();
+		
+		//Get current window handle and select latest consultation record
 		viewConsultationRequestsPage.user_selects_latest_consultation_record();
 	}
 
 	@Then("^Consultation Response/ Request Patient Details section should show all required Patient Information$")
 	public void consultation_Response_Request_Patient_Details_section_should_show_all_required_Patient_Information() {
 		oscarConsultationRequestPage.verify_required_patient_information();
+	}
+	
+	@When("^User clicks on Print Preview button and navigates to Print Preview screen$")
+	public void user_clicks_on_Print_Preview_button_and_navigates_to_Print_Preview_screen() {
+		oscarConsultationRequestPage.user_clicks_Print_Preview_button_and_navigates_to_print_preview();
 	}
 	
 
@@ -135,6 +154,14 @@ public class ConsultationNoteScreenSteps {
 		oscarConsultationRequestPage.consultation_request_is_saved();
 	}
 	
+	@When("^User navigates to Consultation Response/Request Screen from Encounter page$")
+	public void user_navigates_to_Consultation_Response_Request_Screen_from_Encounter_page(){
+	    // Write code here that turns the phrase above into concrete actions
+		encounterPage.navigate_to_patient_info_page();
+		patientDetailInfoPage.click_on_Consultations_and_navigate_to_ViewConsultationRequests_Page();
+		viewConsultationRequestsPage.user_selects_latest_consultation_record();
+	}
+	
 	@Then("^Text fields should appear in the Consultation Request/ Response Note section$")
 	public void text_fields_should_appear_in_the_Consultation_Request_Response_Note_section() {
 		oscarConsultationRequestPage.text_fields_information_present();
@@ -148,6 +175,21 @@ public class ConsultationNoteScreenSteps {
 	@Then("^Pertinent Clinical Information functional buttons should be available$")
 	public void pertinent_Clinical_Information_functional_buttons_should_be_available() {
 		oscarConsultationRequestPage.pertinent_Clinical_Information_functional_buttons_available();
+	}
+	
+	@When("^User selects  Pertinent Clinical Information functional buttons$")
+	public void user_selects_Pertinent_Clinical_Information_functional_buttons() {
+		oscarConsultationRequestPage.user_selects_clinicalInfoFamilyHistory_button();
+	}
+
+	@Then("^Patient chart data should be added to the Pertinent Clinical Information Consult Note text field$")
+	public void patient_chart_data_should_be_added_to_the_Pertinent_Clinical_Information_Consult_Note_text_field() {
+		oscarConsultationRequestPage.user_validates_patient_chart_data_added_in_clinicalInformation_textarea();
+	}
+
+	@Then("^User should be able to edit text before saving Consultation Note$")
+	public void user_should_be_able_to_edit_text_before_saving_Consultation_Note() {
+		oscarConsultationRequestPage.user_is_able_to_edit_clinicalInformation_text();
 	}
 
 
