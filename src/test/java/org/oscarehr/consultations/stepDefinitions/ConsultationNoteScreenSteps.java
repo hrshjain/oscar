@@ -187,10 +187,63 @@ public class ConsultationNoteScreenSteps {
 		oscarConsultationRequestPage.user_validates_patient_chart_data_added_in_clinicalInformation_textarea();
 	}
 
-	@Then("^User should be able to edit text before saving Consultation Note$")
+	@Then("^User should be able to edit Pertinent Clinical Information text before saving Consultation Note")
 	public void user_should_be_able_to_edit_text_before_saving_Consultation_Note() {
 		oscarConsultationRequestPage.user_is_able_to_edit_clinicalInformation_text();
 	}
+	
+	@When("^User verifies that Other Meds button is available in Current Medications Section$")
+	public void user_verifies_that_Other_Meds_button_is_available_in_Current_Medications_Section() {
+	    // Write code here that turns the phrase above into concrete actions
+	}
 
+	@Then("^Other Meds button should be available in Current Medications Section$")
+	public void other_Meds_button_should_be_available_in_Current_Medications_Section() {
+		oscarConsultationRequestPage.other_meds_button_available_in_current_medications();
+	}
+	
+	@When("^User selects  Current Medications functional buttons$")
+	public void user_selects_Current_Medications_functional_buttons() {
+		oscarConsultationRequestPage.user_selects_current_medications_other_meds_button();
+	}
 
+	@Then("^Patient chart data should be added to the Current Medications Consult Note text field$")
+	public void patient_chart_data_should_be_added_to_the_Current_Medications_Consult_Note_text_field() {
+		oscarConsultationRequestPage.user_validates_patient_chart_data_added_in_current_medications_textarea();
+	}
+
+	@Then("^User should be able to edit Current Medication text before saving Consultation Note$")
+	public void user_should_be_able_to_edit_Current_Medication_text_before_saving_Consultation_Note() {
+		oscarConsultationRequestPage.user_is_able_to_edit_current_medications_text();
+	}
+	
+	@When("^User verifies Significant Concurrent Problems functional buttons$")
+	public void user_verifies_Significant_Concurrent_Problems_functional_buttons() {
+	    // Write code here that turns the phrase above into concrete actions
+	}
+
+	@Then("^Significant Concurrent Problems functional buttons should be available$")
+	public void significant_Concurrent_Problems_functional_buttons_should_be_available() {
+		oscarConsultationRequestPage.significant_concurrent_problems_functional_buttons_available();
+	}
+
+	@When("^User selects  Significant Concurrent Problems functional buttons$")
+	public void user_selects_Significant_Concurrent_Problems_functional_buttons() {
+		oscarConsultationRequestPage.user_selects_significant_concurrent_problems_family_history_button();
+	}
+
+	@Then("^Patient chart data should be added to the Significant Concurrent Problems Consult Note text field$")
+	public void patient_chart_data_should_be_added_to_the_Significant_Concurrent_Problems_Consult_Note_text_field() {
+		oscarConsultationRequestPage.user_validates_patient_chart_data_added_in_significant_concurrent_problems_textarea();
+	}
+
+	@Then("^User should be able to edit Significant Concurrent Problems text before saving Consultation Note$")
+	public void user_should_be_able_to_edit_Significant_Concurrent_Problems_text_before_saving_Consultation_Note() {
+		oscarConsultationRequestPage.user_is_able_to_edit_significant_concurrent_problems_text();
+	}
+	
+	@Then("^Consultation Request/ Response Note sections display saved records$")
+	public void consultation_Request_Response_Note_sections_display_saved_records() {
+	    // Write code here that turns the phrase above into concrete actions
+	}
 }

@@ -17,11 +17,14 @@ public class EncounterPage {
 	@FindBy(how = How.XPATH, using = "//div[@id='FamHistory']//div//a[@title='Add Item'][contains(text(),'+')]")
 	static WebElement addFamilyHistoryButton;
 	
+	@FindBy(how = How.XPATH, using = "//div[@id='OMeds']//div//a[@title='Add Item'][contains(text(),'+')]")
+	static WebElement addOtherMedsButton;
+	
 	@FindBy(how = How.XPATH, using = "//textarea[@id='noteEditTxt']")
-	static WebElement familyHistoryNotes;
+	static WebElement notesToEdit;
 	
 	@FindBy(how = How.XPATH, using = "//form[@id='frmIssueNotes']//input[@title='Sign & Save']")
-	static WebElement signAndSaveFamilyHistory;
+	static WebElement signAndSaveButton;
 	
 	@FindBy(how = How.XPATH, using = "//a[@title='Master Record']")
 	static WebElement patientDetailInfoLink;
@@ -56,8 +59,24 @@ public class EncounterPage {
 		for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
-		familyHistoryNotes.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
-		signAndSaveFamilyHistory.click();
+		notesToEdit.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
+		signAndSaveButton.click();
+		
+		//Wait for page load to complete
+	       try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		//Add Other Meds CPP Note
+		addOtherMedsButton.click();
+		for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+		notesToEdit.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
+		signAndSaveButton.click();
 	}
 	
 	public void navigate_to_patient_info_page() {

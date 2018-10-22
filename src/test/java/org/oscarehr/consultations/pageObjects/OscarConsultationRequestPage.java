@@ -135,6 +135,39 @@ public class OscarConsultationRequestPage {
 	@FindBy(how = How.CSS, using = "#fetchLongTermMedications_clinicalInformation")
     static WebElement clinicalInfoLongTermMedicationsButton;
 	
+	@FindBy(how = How.ID, using = "currentMedications")
+    static WebElement currentMedicationsTextArea;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='medsButtonBar']//input[@value='Other Meds']")
+    static WebElement currentMedicationsOtherMeds;
+	
+	@FindBy(how = How.ID, using = "concurrentProblems")
+    static WebElement concurrentProblemsTextArea;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='concurrentProblemsButtonBar']//input[@value='Family History']")
+    static WebElement concurrentProblemsFamilyHistoryButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='concurrentProblemsButtonBar']//input[@value='Medical History']")
+    static WebElement concurrentProblemsMedicalHistoryButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='concurrentProblemsButtonBar']//input[@value='Ongoing Concerns']")
+    static WebElement concurrentProblemsOngoingConcernsButton;
+	
+	@FindBy(how = How.XPATH, using = "//td[@id='concurrentProblemsButtonBar']//input[@value='Other Meds']")
+    static WebElement concurrentProblemsOtherMedsButton;
+	
+	@FindBy(how = How.CSS, using = "#btnReminders2")
+    static WebElement concurrentProblemsRemindersButton;
+	
+	@FindBy(how = How.CSS, using = "#fetchRiskFactors_concurrentProblems")
+    static WebElement concurrentProblemsRiskFactorsButton;
+	
+	@FindBy(how = How.CSS, using = "#fetchMedications_concurrentProblems")
+    static WebElement concurrentProblemsMedicationsButton;
+	
+	@FindBy(how = How.CSS, using = "#fetchLongTermMedications_concurrentProblems")
+    static WebElement concurrentProblemsLongTermMedicationsButton;
+	
 	
 	public void verify_default_letterhead_selection() {
 		Assert.assertEquals(FileReaderManager.getInstance().getConfigReader().getOscarUsername() + ", doctor", letterheadSelected.getText());
@@ -252,7 +285,7 @@ public class OscarConsultationRequestPage {
 		Assert.assertTrue(clinicalInfoRemindersButton.isDisplayed());
 		Assert.assertTrue(clinicalInfoRiskFactorsButton.isDisplayed());
 		Assert.assertTrue(clinicalInfoMedicationsButton.isDisplayed());
-		Assert.assertTrue(clinicalInfoMedicationsButton.isDisplayed());
+		Assert.assertTrue(clinicalInfoLongTermMedicationsButton.isDisplayed());
 	}
 	
 	public void user_selects_clinicalInfoFamilyHistory_button() {
@@ -268,6 +301,45 @@ public class OscarConsultationRequestPage {
 		clinicalInformationTextArea.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
 	}
 	
+	public void other_meds_button_available_in_current_medications() {
+		Assert.assertTrue(currentMedicationsOtherMeds.isDisplayed());
+	}
 	
+	public void user_selects_current_medications_other_meds_button() {
+		currentMedicationsOtherMeds.click();
+	}
+	
+	public void user_validates_patient_chart_data_added_in_current_medications_textarea() {
+		Assert.assertTrue(currentMedicationsTextArea.getAttribute("value").contains(FileReaderManager.getInstance().getConfigReader().getsampleChartData()));
+	}
+	
+	public void user_is_able_to_edit_current_medications_text() {
+		currentMedicationsTextArea.clear();
+		currentMedicationsTextArea.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
+	}
+	
+	public void significant_concurrent_problems_functional_buttons_available() {
+		Assert.assertTrue(concurrentProblemsFamilyHistoryButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsMedicalHistoryButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsOngoingConcernsButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsOtherMedsButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsRemindersButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsRiskFactorsButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsMedicationsButton.isDisplayed());
+		Assert.assertTrue(concurrentProblemsLongTermMedicationsButton.isDisplayed());
+	}
+	
+	public void user_selects_significant_concurrent_problems_family_history_button() {
+		concurrentProblemsFamilyHistoryButton.click();
+	}
+	
+	public void user_validates_patient_chart_data_added_in_significant_concurrent_problems_textarea() {
+		Assert.assertTrue(concurrentProblemsTextArea.getAttribute("value").contains(FileReaderManager.getInstance().getConfigReader().getsampleChartData()));
+	}
+	
+	public void user_is_able_to_edit_significant_concurrent_problems_text() {
+		concurrentProblemsTextArea.clear();
+		concurrentProblemsTextArea.sendKeys(FileReaderManager.getInstance().getConfigReader().getsampleChartData());
+	}
 	
 }

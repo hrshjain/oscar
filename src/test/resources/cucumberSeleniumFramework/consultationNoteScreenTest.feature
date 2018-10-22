@@ -37,7 +37,24 @@ Feature: Consultation Note Screen functionality
     Then Pertinent Clinical Information functional buttons should be available
     When User selects  Pertinent Clinical Information functional buttons
     Then Patient chart data should be added to the Pertinent Clinical Information Consult Note text field
-    And User should be able to edit text before saving Consultation Note
+    And User should be able to edit Pertinent Clinical Information text before saving Consultation Note
+    When User verifies that Other Meds button is available in Current Medications Section
+    Then Other Meds button should be available in Current Medications Section
+    When User selects  Current Medications functional buttons
+    Then Patient chart data should be added to the Current Medications Consult Note text field
+    And User should be able to edit Current Medication text before saving Consultation Note
+  	When User verifies Significant Concurrent Problems functional buttons
+    Then Significant Concurrent Problems functional buttons should be available
+    When User selects  Significant Concurrent Problems functional buttons
+    Then Patient chart data should be added to the Significant Concurrent Problems Consult Note text field
+    And User should be able to edit Significant Concurrent Problems text before saving Consultation Note
+    When User selects Save button
+    Then Save button is available and Consultation Request/ Response is saved
+    When User selects Print Preview button and navigates to Print Preview screen - after saving consultation request
+    Then Consultation Request/ Response Note sections display saved records
+    
+    
+    
     
     
   	
