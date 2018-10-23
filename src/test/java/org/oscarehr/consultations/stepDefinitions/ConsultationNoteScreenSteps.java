@@ -159,7 +159,8 @@ public class ConsultationNoteScreenSteps {
 	    // Write code here that turns the phrase above into concrete actions
 		encounterPage.navigate_to_patient_info_page();
 		patientDetailInfoPage.click_on_Consultations_and_navigate_to_ViewConsultationRequests_Page();
-		viewConsultationRequestsPage.user_selects_latest_consultation_record();
+		testContext.scenarioContext.setContext(Context.VIEW_CONSULTATION_REQUEST_PAGE_HANDLE, viewConsultationRequestsPage.get_current_window_handle());
+		viewConsultationRequestsPage.user_starts_new_consultation();
 	}
 	
 	@Then("^Text fields should appear in the Consultation Request/ Response Note section$")
