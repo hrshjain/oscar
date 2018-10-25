@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.managers.FileReaderManager;
-import org.oscarehr.consultations.pageObjects.LoginPage;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -14,21 +13,15 @@ import cucumber.api.java.en.When;
 public class ConsultationNoteScreenSteps {
 	
 	TestContext testContext;
-	LoginPage loginPage;
 	WebDriver driver;
 	
 	public ConsultationNoteScreenSteps(TestContext context) {
 		testContext = context;
-		loginPage = testContext.getPageObjectManager().loginPage();
 		driver = testContext.getWebDriverManager().getDriver();
 	}
 	
 	@When("^New Consult Note is started$")
 	public void new_Consult_Note_is_started() {
-		//launch Firefox browser and add implicit wait
-		loginPage.login_into_oscar_emr();
-		loginPage.click_on_schedule();
-	    
 	    //Click on search tab and navigate to Patient Search Results page
 	    driver.findElement(By.xpath("//a[@title='Search for patient records']")).click();
         for(String winHandle : driver.getWindowHandles()){
@@ -67,8 +60,5 @@ public class ConsultationNoteScreenSteps {
 		//Verify letterhead is equal to current logged in user
 		WebElement letterheadDefault = driver.findElement(By.xpath("//select[@id='letterheadName']//option[@selected='selected']"));
 		Assert.assertEquals(letterheadDefault.getText(),FileReaderManager.getInstance().getConfigReader().getOscarUsername() + ", doctor");
-		
-		//Close all browser instances
-		testContext.getWebDriverManager().closeDriver();
 	}
 }
