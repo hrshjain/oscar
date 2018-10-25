@@ -9,7 +9,6 @@ import org.oscarehr.consultations.pageObjects.PatientSearchResultsPage;
 import org.oscarehr.consultations.pageObjects.ViewConsultationRequestsPage;
 
 import cucumber.api.java.After;
-//import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class Hooks {
