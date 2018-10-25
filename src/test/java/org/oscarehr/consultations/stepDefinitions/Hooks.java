@@ -11,7 +11,8 @@ public class Hooks {
 	TestContext testContext;
 	LoginPage loginPage;
 	
-	public Hooks(){
+	public Hooks(TestContext context){
+		testContext = context;
 		loginPage = testContext.getPageObjectManager().loginPage();
 	}
 	
