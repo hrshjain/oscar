@@ -4,9 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.oscarehr.consultations.cucumber.TestContext;
 import org.oscarehr.consultations.managers.FileReaderManager;
-import org.oscarehr.consultations.managers.PageObjectManager;
-import org.oscarehr.consultations.managers.WebDriverManager;
 import org.oscarehr.consultations.pageObjects.LoginPage;
 
 import cucumber.api.java.en.Then;
@@ -14,20 +13,19 @@ import cucumber.api.java.en.When;
 
 public class ConsultationNoteScreenSteps {
 	
-	WebDriver driver;
-	WebDriverManager webDriverManager;
+	TestContext testContext;
 	LoginPage loginPage;
-	PageObjectManager pageObjectManager;
+	WebDriver driver;
+	
+	public ConsultationNoteScreenSteps(TestContext context) {
+		testContext = context;
+		loginPage = testContext.getPageObjectManager().loginPage();
+		driver = testContext.getWebDriverManager().getDriver();
+	}
 	
 	@When("^New Consult Note is started$")
 	public void new_Consult_Note_is_started() {
 		//launch Firefox browser and add implicit wait
-		webDriverManager = new WebDriverManager();
-		driver = webDriverManager.getDriver();
-		pageObjectManager = new PageObjectManager(driver);
-		
-		loginPage = pageObjectManager.loginPage();
-    	
 		loginPage.login_into_oscar_emr();
 		loginPage.click_on_schedule();
 	    
@@ -71,6 +69,6 @@ public class ConsultationNoteScreenSteps {
 		Assert.assertEquals(letterheadDefault.getText(),FileReaderManager.getInstance().getConfigReader().getOscarUsername() + ", doctor");
 		
 		//Close all browser instances
-		webDriverManager.closeDriver();
+		testContext.getWebDriverManager().closeDriver();
 	}
 }
