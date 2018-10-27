@@ -18,7 +18,7 @@ Feature: Consultation Note Screen functionality
   Scenario: 1.1 Consultation Response/ Request Patient Details Section
   	When User navigates to Consultation Response/Request Screen
   	Then Consultation Response/ Request Patient Details section should show all required Patient Information
-  	When User clicks on Print Preview button and navigates to Print Preview screen
+  	When User clicks on Print Preview button and navigates to Print Preview screen	
   	And Consult Response/ Request Patient Details Section display all required Patient Information
     
   @1.2TestFieldsInConsultationResponseNoteSection

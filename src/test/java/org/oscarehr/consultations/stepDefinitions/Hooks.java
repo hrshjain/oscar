@@ -48,10 +48,10 @@ public class Hooks {
 		encounterPage.add_cpp_notes_to_patient_echart();
 	}
 	
-	
-	@After
+	@After(order = 0)
 	public void closeAllWindows() {
 		testContext.getWebDriverManager().closeDriver();
 	}
+
 }
 
